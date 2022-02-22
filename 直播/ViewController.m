@@ -15,9 +15,10 @@
 #import "RtmpClient.h"
 #import "LYOpenGLView.h"
 #import "SoftDecoder.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
-//#define liveUrl @"rtmp://192.168.2.116:1888/liveApps/Demo"
-#define liveUrl @"http://ebook.tcloudfamily.com/questionvideo/e7ba2d09f79d467b894020a336f4d407_Ep.01_x264.mp4?OSSAccessKeyId=LTAI4Fva3tusCcgecVq1gPsQ&Expires=1594370845&Signature=nic2kEjz5jj8QLCCTgykLFy3Wb0%3D"
+#define liveUrl @"rtmp://169.254.251.59:1990/liveApp/abc"
+//#define liveUrl @"http://ebook.tcloudfamily.com/questionvideo/e7ba2d09f79d467b894020a336f4d407_Ep.01_x264.mp4?OSSAccessKeyId=LTAI4Fva3tusCcgecVq1gPsQ&Expires=1594370845&Signature=nic2kEjz5jj8QLCCTgykLFy3Wb0%3D"
 
 
 @interface ViewController () <VideoCaptureOutputDelegate, VideoHWH264EncoderDelegate, AudioHWACCEncoderDelegate, RtmpClientRecvDelegate, VideoDecodeDelegate>
@@ -148,6 +149,7 @@
 }
 
 - (void)liveOnAction:(UIButton *)button {
+    NSLog(@"点击了");
     if (![VideoManager sharedInstance].superview) {
         [VideoManager sharedInstance].superview = self.view;
         [VideoManager sharedInstance].delegate = self;

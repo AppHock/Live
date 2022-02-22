@@ -83,10 +83,12 @@
 
 - (void)endVideoToolBox
 {
-    VTCompressionSessionCompleteFrames(EncodingSession, kCMTimeInvalid);
-    VTCompressionSessionInvalidate(EncodingSession);
-    CFRelease(EncodingSession);
-    EncodingSession = NULL;
+    if (EncodingSession != NULL) {
+        VTCompressionSessionCompleteFrames(EncodingSession, kCMTimeInvalid);
+        VTCompressionSessionInvalidate(EncodingSession);
+        CFRelease(EncodingSession);
+        EncodingSession = NULL;
+    }
     
     [fileHandle closeFile];
     fileHandle = NULL;

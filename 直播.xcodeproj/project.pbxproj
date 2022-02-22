@@ -35,6 +35,11 @@
 		CB68A5E22472DDDA00DF76DB /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CBF6BF22245D1F000013AB8E /* libiconv.tbd */; };
 		CB6B700E246293E600ED1D48 /* NSData+show.m in Sources */ = {isa = PBXBuildFile; fileRef = CB6B700D246293E600ED1D48 /* NSData+show.m */; };
 		CB6B70102462B15D00ED1D48 /* abc.h264 in Resources */ = {isa = PBXBuildFile; fileRef = CB6B700F2462B15C00ED1D48 /* abc.h264 */; };
+		CB83178E27410A8D00E69B6C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB83178D27410A8D00E69B6C /* HomeViewController.m */; };
+		CB83179127410E2500E69B6C /* aac2pcm.m in Sources */ = {isa = PBXBuildFile; fileRef = CB83179027410E2500E69B6C /* aac2pcm.m */; };
+		CB831795274112A600E69B6C /* NSFileHandle+Live.m in Sources */ = {isa = PBXBuildFile; fileRef = CB831794274112A600E69B6C /* NSFileHandle+Live.m */; };
+		CB8317992741400100E69B6C /* A_PViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB8317982741400100E69B6C /* A_PViewController.m */; };
+		CB83179D2741403400E69B6C /* UIButton+Live.m in Sources */ = {isa = PBXBuildFile; fileRef = CB83179C2741403400E69B6C /* UIButton+Live.m */; };
 		CBC785782453F2F400B32D6F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC785772453F2F400B32D6F /* AppDelegate.m */; };
 		CBC7857B2453F2F400B32D6F /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC7857A2453F2F400B32D6F /* SceneDelegate.m */; };
 		CBC7857E2453F2F400B32D6F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CBC7857D2453F2F400B32D6F /* ViewController.m */; };
@@ -195,6 +200,16 @@
 		CB6B700C246293E600ED1D48 /* NSData+show.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+show.h"; sourceTree = "<group>"; };
 		CB6B700D246293E600ED1D48 /* NSData+show.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+show.m"; sourceTree = "<group>"; };
 		CB6B700F2462B15C00ED1D48 /* abc.h264 */ = {isa = PBXFileReference; lastKnownFileType = file; path = abc.h264; sourceTree = "<group>"; };
+		CB83178C27410A8D00E69B6C /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		CB83178D27410A8D00E69B6C /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		CB83178F27410E2500E69B6C /* aac2pcm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = aac2pcm.h; sourceTree = "<group>"; };
+		CB83179027410E2500E69B6C /* aac2pcm.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = aac2pcm.m; sourceTree = "<group>"; };
+		CB831793274112A600E69B6C /* NSFileHandle+Live.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+Live.h"; sourceTree = "<group>"; };
+		CB831794274112A600E69B6C /* NSFileHandle+Live.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+Live.m"; sourceTree = "<group>"; };
+		CB8317972741400100E69B6C /* A_PViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = A_PViewController.h; sourceTree = "<group>"; };
+		CB8317982741400100E69B6C /* A_PViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A_PViewController.m; sourceTree = "<group>"; };
+		CB83179B2741403400E69B6C /* UIButton+Live.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+Live.h"; sourceTree = "<group>"; };
+		CB83179C2741403400E69B6C /* UIButton+Live.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Live.m"; sourceTree = "<group>"; };
 		CBC785732453F2F400B32D6F /* 直播.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "直播.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CBC785762453F2F400B32D6F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CBC785772453F2F400B32D6F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -633,6 +648,68 @@
 			path = GLView;
 			sourceTree = "<group>";
 		};
+		CB7C37162740A4BF00D04D0A /* FFmpeg功能 */ = {
+			isa = PBXGroup;
+			children = (
+				CB7C37182740A4E300D04D0A /* 视频模块 */,
+				CB7C37172740A4D400D04D0A /* 音频模块 */,
+			);
+			path = "FFmpeg功能";
+			sourceTree = "<group>";
+		};
+		CB7C37172740A4D400D04D0A /* 音频模块 */ = {
+			isa = PBXGroup;
+			children = (
+				CB7C371B2740A50B00D04D0A /* aac转pcm(解码) */,
+				CB7C371A2740A4F600D04D0A /* pcm转aac(编码) */,
+				CB7C37192740A4EC00D04D0A /* 录制pcm */,
+			);
+			path = "音频模块";
+			sourceTree = "<group>";
+		};
+		CB7C37182740A4E300D04D0A /* 视频模块 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "视频模块";
+			sourceTree = "<group>";
+		};
+		CB7C37192740A4EC00D04D0A /* 录制pcm */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "录制pcm";
+			sourceTree = "<group>";
+		};
+		CB7C371A2740A4F600D04D0A /* pcm转aac(编码) */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "pcm转aac(编码)";
+			sourceTree = "<group>";
+		};
+		CB7C371B2740A50B00D04D0A /* aac转pcm(解码) */ = {
+			isa = PBXGroup;
+			children = (
+				CB83178F27410E2500E69B6C /* aac2pcm.h */,
+				CB83179027410E2500E69B6C /* aac2pcm.m */,
+				CB8317972741400100E69B6C /* A_PViewController.h */,
+				CB8317982741400100E69B6C /* A_PViewController.m */,
+			);
+			path = "aac转pcm(解码)";
+			sourceTree = "<group>";
+		};
+		CB8317922741126500E69B6C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CB831793274112A600E69B6C /* NSFileHandle+Live.h */,
+				CB831794274112A600E69B6C /* NSFileHandle+Live.m */,
+				CB83179B2741403400E69B6C /* UIButton+Live.h */,
+				CB83179C2741403400E69B6C /* UIButton+Live.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		CBA22649273CA4860095E55C /* 数据 */ = {
 			isa = PBXGroup;
 			children = (
@@ -662,6 +739,8 @@
 		CBC785752453F2F400B32D6F /* 直播 */ = {
 			isa = PBXGroup;
 			children = (
+				CB8317922741126500E69B6C /* Category */,
+				CB7C37162740A4BF00D04D0A /* FFmpeg功能 */,
 				CBA22649273CA4860095E55C /* 数据 */,
 				CB16C020246C1E0F0017559C /* 解码 */,
 				CB16C01F246C1E0C0017559C /* 编码 */,
@@ -683,6 +762,8 @@
 				CBC785882453F2F600B32D6F /* main.m */,
 				CB6B700C246293E600ED1D48 /* NSData+show.h */,
 				CB6B700D246293E600ED1D48 /* NSData+show.m */,
+				CB83178C27410A8D00E69B6C /* HomeViewController.h */,
+				CB83178D27410A8D00E69B6C /* HomeViewController.m */,
 			);
 			path = "直播";
 			sourceTree = "<group>";
@@ -912,10 +993,15 @@
 				CB043D1F24605E1400340264 /* LYOpenGLView.m in Sources */,
 				CB16C026246C1F060017559C /* SoftDecoder.m in Sources */,
 				CBC785782453F2F400B32D6F /* AppDelegate.m in Sources */,
+				CB83178E27410A8D00E69B6C /* HomeViewController.m in Sources */,
+				CB831795274112A600E69B6C /* NSFileHandle+Live.m in Sources */,
+				CB8317992741400100E69B6C /* A_PViewController.m in Sources */,
 				CB4967FB245F0F35007DFBA8 /* AudioDecoder.m in Sources */,
 				CB1EB2D8245722580028401E /* VideoEncoder.m in Sources */,
+				CB83179127410E2500E69B6C /* aac2pcm.m in Sources */,
 				CBF6BF27245D2AB40013AB8E /* RtmpClient.m in Sources */,
 				CB6B700E246293E600ED1D48 /* NSData+show.m in Sources */,
+				CB83179D2741403400E69B6C /* UIButton+Live.m in Sources */,
 				CBC785892453F2F600B32D6F /* main.m in Sources */,
 				CB1433B424567669002053AB /* VideoManager.m in Sources */,
 				CBC7857B2453F2F400B32D6F /* SceneDelegate.m in Sources */,
@@ -1059,10 +1145,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2B8818613D8DCEFCD84AE1A9 /* Pods-直播.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R996ZQRD3Z;
+				DEVELOPMENT_TEAM = B59SV3LHM7;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1070,7 +1158,7 @@
 					"\"$(SRCROOT)/直播/Framework/FFmpeg/include\"",
 				);
 				INFOPLIST_FILE = "直播/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1080,7 +1168,7 @@
 					"$(PROJECT_DIR)/直播/Framework/librtmp/lib",
 					"$(PROJECT_DIR)/直播/Framework/FFmpeg/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cp.andy.com163;
+				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1090,10 +1178,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 164F3226CAFB230E373FBA83 /* Pods-直播.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R996ZQRD3Z;
+				DEVELOPMENT_TEAM = B59SV3LHM7;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = "";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1101,7 +1191,7 @@
 					"\"$(SRCROOT)/直播/Framework/FFmpeg/include\"",
 				);
 				INFOPLIST_FILE = "直播/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1111,7 +1201,7 @@
 					"$(PROJECT_DIR)/直播/Framework/librtmp/lib",
 					"$(PROJECT_DIR)/直播/Framework/FFmpeg/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cp.andy.com163;
+				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
