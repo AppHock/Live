@@ -54,6 +54,7 @@
 
 @property (nonatomic, strong) NSString *rtmpUrl;
 @property (nonatomic, strong) UITextField *tf;
+@property (nonatomic, strong) UILabel *IPLabel;
 
 @end
 
@@ -116,6 +117,7 @@
     
     self.tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 400, 200, 30)];
     [self.view addSubview:self.tf];
+    self.tf.keyboardType = UIKeyboardTypeNumberPad;
     self.tf.borderStyle = UITextBorderStyleLine;
     self.tf.placeholder = @"请输入服务器IP地址";
     
@@ -124,12 +126,17 @@
     [button setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
     [button addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
+    
+    self.IPLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 450, self.view.frame.size.width, 30)];
+    self.IPLabel.textColor = UIColor.redColor;
+    self.IPLabel.textAlignment = NSTextAlignmentCenter;
 }
 
 - (void)confirm {
     [self.view endEditing:YES];
     self.rtmpUrl = [NSString stringWithFormat:@"rtmp://%@:1990/liveApp/abc", self.tf.text];
     self.tf.text = @"";
+    self.IPLabel.text = [NSString stringWithFormat:@"当前IP地址【%@】", self.tf.text];
 }
 
 - (void)watchLive:(UIButton *)button {
