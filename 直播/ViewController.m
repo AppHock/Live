@@ -17,7 +17,7 @@
 #import "SoftDecoder.h"
 #import <MBProgressHUD/MBProgressHUD.h>
 
-#define liveUrl @"rtmp://169.254.251.59:1990/liveApp/abc"
+#define liveUrl @"rtmp://169.254.206.178:1990/liveApp/abc"
 //#define liveUrl @"http://ebook.tcloudfamily.com/questionvideo/e7ba2d09f79d467b894020a336f4d407_Ep.01_x264.mp4?OSSAccessKeyId=LTAI4Fva3tusCcgecVq1gPsQ&Expires=1594370845&Signature=nic2kEjz5jj8QLCCTgykLFy3Wb0%3D"
 
 
@@ -52,12 +52,17 @@
 
 @property (nonatomic , strong) UIImageView *videoPlayer;
 
+@property (nonatomic, strong) NSString *rtmpUrl;
+@property (nonatomic, strong) UITextField *tf;
+
 @end
 
 @implementation ViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.rtmpUrl = @"rtmp://169.254.206.178:1990/liveApp/abc";
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSURL *url = [NSURL URLWithString:@"https://www.baidu.com/?tn=baiduerr"];
@@ -108,24 +113,41 @@
     decoderVideoQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     
     [RtmpClient getInstance].recvDelegate = self;
+    
+    self.tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 400, 200, 30)];
+    [self.view addSubview:self.tf];
+    self.tf.borderStyle = UITextBorderStyleLine;
+    self.tf.placeholder = @"请输入服务器IP地址";
+    
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(280, 400, 50, 30)];
+    [button setTitle:@"确定" forState:UIControlStateNormal];
+    [button setTitleColor:UIColor.blueColor forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(confirm) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+}
+
+- (void)confirm {
+    [self.view endEditing:YES];
+    self.rtmpUrl = [NSString stringWithFormat:@"rtmp://%@:1990/liveApp/abc", self.tf.text];
+    self.tf.text = @"";
 }
 
 - (void)watchLive:(UIButton *)button {
-    if (1) {
-        _videoPlayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, 400)];
-        _softDecoder = [[SoftDecoder alloc] initDecoderWithURL:liveUrl];
-        _softDecoder.outputWidth = _videoPlayer.frame.size.width/2;
-        _softDecoder.outputHeight = _videoPlayer.frame.size.height/2;
-                //使用一个定时器来不断播放视频帧
-        [self displayNextFrame];
-        return;
-    }
+//    if (1) {
+//        _videoPlayer = [[UIImageView alloc] initWithFrame:CGRectMake(0, 30, self.view.frame.size.width, 400)];
+//        _softDecoder = [[SoftDecoder alloc] initDecoderWithURL:self.rtmpUrl];
+//        _softDecoder.outputWidth = _videoPlayer.frame.size.width/2;
+//        _softDecoder.outputHeight = _videoPlayer.frame.size.height/2;
+//                //使用一个定时器来不断播放视频帧
+//        [self displayNextFrame];
+//        return;
+//    }
     
     [RtmpClient getInstance].type = RTMP_RECV;
     self.openGLView.hidden = NO;
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSLog(@"[NSThread isMainThread] = %d", [NSThread isMainThread]);
-        if (![[RtmpClient getInstance] startRtmpConnect:liveUrl]) {
+        if (![[RtmpClient getInstance] startRtmpConnect:self.rtmpUrl]) {
             NSLog(@"直播间连接失败");
         } else {
             NSLog(@"主播下线");
@@ -157,7 +179,7 @@
 
     button.selected = !button.selected;
     if (button.selected) {
-        if ([[RtmpClient getInstance] startRtmpConnect:liveUrl]) {
+        if ([[RtmpClient getInstance] startRtmpConnect:self.rtmpUrl]) {
             isLiveStatus = YES;
             [_vEncoder startVideoToolBox];
             [[VideoManager sharedInstance] startRunning];

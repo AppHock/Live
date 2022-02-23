@@ -102,6 +102,7 @@ static const AVal av_SDKVersion = AVC("@meidaios 1.0.0");
         [self closeRtmpConnect];
     }
     
+    // 初始化rtmp对象
     rtmp = RTMP_Alloc();
     RTMP_Init(rtmp);
     rtmp->Link.timeout = 5;
