@@ -513,7 +513,7 @@ static const AVal av_SDKVersion = AVC("@meidaios 1.0.0");
     long pps_len = ppsData.length;
     
     dispatch_async(self.rtmpQueue, ^{
-        if (rtmp != NULL) {
+        if (self->rtmp != NULL) {
             unsigned char *body = NULL;
             NSInteger iIndex = 0;
             NSInteger rtmpLength = 1024;

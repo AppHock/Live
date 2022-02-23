@@ -56,7 +56,7 @@
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_RealTime, kCFBooleanTrue);
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_ProfileLevel, kVTProfileLevel_H264_Baseline_AutoLevel);
         
-        // 设置关键帧（GOP）间隔
+        // GOP：设置关键帧（IDR）间隔
         int frameInterval = 20;
         CFNumberRef frameIntervalRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &frameInterval);
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_MaxKeyFrameInterval, frameIntervalRef);
@@ -66,13 +66,13 @@
         CFNumberRef fpsRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &fps);
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_ExpectedFrameRate, fpsRef);
         
-        // 设置码率
-        int bitRate = width * height * 3 * 4 * 8;
+        // 设置码率，单位bps（码率 = 图片像素宽 * 图片像素高 * 像素大小 * 一个字节为8位 * 帧率）
+        int bitRate = width * height * 3 * 8 * fps;
         CFNumberRef bitRateRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &bitRate);
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_AverageBitRate, bitRateRef);
         
-        // 设置码率，上线。单位bps
-        int bitRateLimit = width * height * 3 * 4;
+        // 设置码率上线，单位Bps
+        int bitRateLimit = width * height * 3 * fps * 1.5;
         CFNumberRef bitRateLimitRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberIntType, &bitRateLimit);
         VTSessionSetProperty(EncodingSession, kVTCompressionPropertyKey_DataRateLimits, bitRateLimitRef);
         
@@ -134,7 +134,7 @@ void didCompressH264(void *outputCallbackRefcon, void *sourceFrameRefCon, OSStat
     
     bool keyFrame = !CFDictionaryContainsKey(CFArrayGetValueAtIndex(CMSampleBufferGetSampleAttachmentsArray(sampleBuffer, true), 0), kCMSampleAttachmentKey_NotSync);
     // 判断当前帧是否为关键帧
-    // 获取sps 喝 pps数据
+    // 获取sps 和 pps数据
     
     if (keyFrame) {
         NSLog(@"this is I Frame");
@@ -150,14 +150,15 @@ void didCompressH264(void *outputCallbackRefcon, void *sourceFrameRefCon, OSStat
             if (statusCode == noErr) {
                 NSData *sps_D = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeySPS"];
                 NSData *pps_D = [[NSUserDefaults standardUserDefaults] objectForKey:@"KeyPPS"];
-                if (!sps_D.length || !pps_D.length) {
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithBytes:sparameterSet length:sparameterSetsize] forKey:@"KeySPS"];
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSData dataWithBytes:pparameterSet length:pparameterSetSize] forKey:@"KeyPPS"];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
-                }
-
+                
                 NSData *sps = [NSData dataWithBytes:sparameterSet length:sparameterSetsize];
                 NSData *pps = [NSData dataWithBytes:pparameterSet length:pparameterSetSize];
+                
+                if (!sps_D.length || !pps_D.length) {
+                    [[NSUserDefaults standardUserDefaults] setObject:sps forKey:@"KeySPS"];
+                    [[NSUserDefaults standardUserDefaults] setObject:pps forKey:@"KeyPPS"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
                 
                 if (sps_D.length && pps_D.length) {
                     sps = [NSData dataWithData:sps_D];

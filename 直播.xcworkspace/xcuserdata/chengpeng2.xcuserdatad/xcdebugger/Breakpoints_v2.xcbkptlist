@@ -3,4 +3,22 @@
    uuid = "98D26816-FDFA-4601-BB37-E3303116174D"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C83E6B4D-7F74-4695-A069-43A5B2A40966"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "&#x76f4;&#x64ad;/&#x7f16;&#x7801;/&#x786c;&#x7f16;&#x7801;/VideoEncoder.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
+            landmarkName = "didCompressH264(outputCallbackRefcon, sourceFrameRefCon, status, infoFlags, sampleBuffer)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
