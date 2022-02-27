@@ -247,13 +247,26 @@ OSStatus inInputDataProc(AudioConverterRef inAudioConverter, UInt32 *ioNumberDat
         NSData *data = nil;
         if (status == 0) {
             NSData *rawAAC = [NSData dataWithBytes:outAudioBufferList.mBuffers[0].mData length:outAudioBufferList.mBuffers[0].mDataByteSize];
+            
+            // 添加adts头信息，保本到本地acc文件
             NSData *adtsHeader = [self adtsDataForPacketLength:rawAAC.length];
             NSMutableData *fullData = [NSMutableData dataWithData:adtsHeader];
             [fullData appendData:rawAAC];
             data = fullData;
-            // 如果是直播可以不用发送adts头信息，如果是保存aac文件则需要
-            if (self.delegate && [self.delegate respondsToSelector:@selector(audioEncoder:audioData:)]) {
-                [self.delegate audioEncoder:self audioData:rawAAC];
+            
+            if (!self.sentAudioHead) {
+#pragma warning --- 此处有疑问，如果只发送一次音频头信息，主播开始直播后，再进入直播间的，如何拿到音频头信息解码
+                char exeData[2];
+                exeData[0] = self.asc[0];
+                exeData[1] = self.asc[1];
+                NSData *headerData =[NSData dataWithBytes:exeData length:2];
+                [self.delegate audioEncoder:self audioHeader:headerData];
+                self.sentAudioHead =  YES;
+            } else {
+                // 如果是直播可以不用发送adts头信息
+                if (self.delegate && [self.delegate respondsToSelector:@selector(audioEncoder:audioData:)]) {
+                    [self.delegate audioEncoder:self audioData:rawAAC];
+                }
             }
         } else {
             error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];

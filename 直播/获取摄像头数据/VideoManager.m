@@ -86,7 +86,7 @@
     }
     
     AVCaptureVideoPreviewLayer *previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:_captureSession];
-    previewLayer.frame = [UIScreen mainScreen].bounds;
+    previewLayer.frame = CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 400);
     [self.superview.layer addSublayer:previewLayer];
     
     _videoConnection = [videoOutput connectionWithMediaType:AVMediaTypeVideo];

@@ -1,0 +1,14 @@
+//
+//  PrefixHeader.pch
+//  直播
+//
+//  Created by Hock on 2022/2/27.
+//  Copyright © 2022 Hock. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#import "NSData+show.h"
+
+#endif /* PrefixHeader_pch */

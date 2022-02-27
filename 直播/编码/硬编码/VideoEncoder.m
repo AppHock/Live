@@ -7,7 +7,6 @@
 //
 
 #import "VideoEncoder.h"
-#import "NSData+show.h"
 
 @interface VideoEncoder ()
 {

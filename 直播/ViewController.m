@@ -18,6 +18,8 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 
 #define liveUrl @"rtmp://169.254.206.178:1990/liveApp/abc"
+#define lastIPKey @"lastIP"
+#define port 5080
 //#define liveUrl @"http://ebook.tcloudfamily.com/questionvideo/e7ba2d09f79d467b894020a336f4d407_Ep.01_x264.mp4?OSSAccessKeyId=LTAI4Fva3tusCcgecVq1gPsQ&Expires=1594370845&Signature=nic2kEjz5jj8QLCCTgykLFy3Wb0%3D"
 
 
@@ -56,6 +58,8 @@
 @property (nonatomic, strong) UITextField *tf;
 @property (nonatomic, strong) UILabel *IPLabel;
 
+@property (nonatomic, strong) NSString *lastIP;
+
 @end
 
 @implementation ViewController
@@ -63,7 +67,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.rtmpUrl = @"rtmp://169.254.206.178:1990/liveApp/abc";
+    self.rtmpUrl = [NSString stringWithFormat:@"rtmp://%@:%d/liveApp/abc", self.lastIP, port];
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         NSURL *url = [NSURL URLWithString:@"https://www.baidu.com/?tn=baiduerr"];
@@ -117,7 +121,7 @@
     
     self.tf = [[UITextField alloc] initWithFrame:CGRectMake(50, 400, 200, 30)];
     [self.view addSubview:self.tf];
-    self.tf.keyboardType = UIKeyboardTypeNumberPad;
+    self.tf.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
     self.tf.borderStyle = UITextBorderStyleLine;
     self.tf.placeholder = @"请输入服务器IP地址";
     
@@ -130,13 +134,22 @@
     self.IPLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 450, self.view.frame.size.width, 30)];
     self.IPLabel.textColor = UIColor.redColor;
     self.IPLabel.textAlignment = NSTextAlignmentCenter;
+    [self.view addSubview:self.IPLabel];
+    if (self.lastIP.length) {
+        self.IPLabel.text = [NSString stringWithFormat:@"当前IP地址【%@】", self.lastIP];
+    }
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 - (void)confirm {
     [self.view endEditing:YES];
-    self.rtmpUrl = [NSString stringWithFormat:@"rtmp://%@:1990/liveApp/abc", self.tf.text];
-    self.tf.text = @"";
+    self.rtmpUrl = [NSString stringWithFormat:@"rtmp://%@:%d/liveApp/abc", self.tf.text, port];
     self.IPLabel.text = [NSString stringWithFormat:@"当前IP地址【%@】", self.tf.text];
+    self.lastIP = self.tf.text;
+    self.tf.text = @"";
 }
 
 - (void)watchLive:(UIButton *)button {
@@ -321,6 +334,15 @@
         [_openGLView setupGL];
     }
     return _openGLView;
+}
+
+- (NSString *)lastIP {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:lastIPKey];
+}
+
+- (void)setLastIP:(NSString *)lastIP {
+    [[NSUserDefaults standardUserDefaults] setObject:lastIP forKey:lastIPKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
