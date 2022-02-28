@@ -1168,7 +1168,7 @@
 					"$(PROJECT_DIR)/直播/Framework/librtmp/lib",
 					"$(PROJECT_DIR)/直播/Framework/FFmpeg/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163;
+				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1201,7 +1201,7 @@
 					"$(PROJECT_DIR)/直播/Framework/librtmp/lib",
 					"$(PROJECT_DIR)/直播/Framework/FFmpeg/lib",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163;
+				PRODUCT_BUNDLE_IDENTIFIER = cp.andys.com163.com;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

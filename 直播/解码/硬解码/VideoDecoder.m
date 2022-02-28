@@ -204,9 +204,10 @@ const uint8_t lyStartCode[4] = {0, 0, 0, 1};
         memset(packetBuffer, 0, packetSize);
         memcpy(packetBuffer, (uint8_t *)videoData.bytes, packetSize);
         
-        uint32_t nalSize = (uint32_t)(packetSize-4); // 21102633
-        uint32_t *pNalSize = (uint32_t *)packetBuffer; // 151052799
-        *pNalSize = CFSwapInt32HostToBig(nalSize); // 687882753
+//        uint32_t nalSize = (uint32_t)(packetSize-4); // 21102633
+//        uint32_t *pNalSize = (uint32_t *)packetBuffer; // 151052799
+//        // 小端转大端
+//        *pNalSize = CFSwapInt32HostToBig(nalSize); // 687882753
     
         pixelBuffer = [self decodeWithPbuffer:packetBuffer pSize:packetSize];
         // 必须释放，否则严重内存泄漏

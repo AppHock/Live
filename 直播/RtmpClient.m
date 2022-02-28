@@ -220,7 +220,8 @@ static const AVal av_SDKVersion = AVC("@meidaios 1.0.0");
     if (packet.m_packetType == RTMP_PACKET_TYPE_VIDEO && RTMP_ClientPacket(rtmp, &packet)) {
         BOOL keyFrame = 0x17 == packet.m_body[0];
         BOOL sequence = 0x00 == packet.m_body[1];
-
+        
+        // 记录是否已经处理过sps和pps数据，因为每个关键帧数据都会带sps和pps，不需要每次都解析出改数据
         static BOOL isSendSpsAndPps = NO;
         // SPS、PPS sequence
         NSData *spsData, *ppsData;

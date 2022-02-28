@@ -91,7 +91,7 @@
     // 初始化输出流的结构体描述为0. 很重要。
     AudioStreamBasicDescription outAudioStreamBasicDescription = {0};
     
-    // 音频流，在正常播放情况下的帧率。如果是压缩的格式，这个属性表示解压缩后的帧率。帧率不能为0。
+    // 音频流，在正常播放情况下的采样率。如果是压缩的格式，这个属性表示解压缩后的采样率。采样率不能为0。
     outAudioStreamBasicDescription.mSampleRate = inAudioStreamBasicDescription.mSampleRate;
     
     // 设置编码格式
