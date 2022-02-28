@@ -345,6 +345,7 @@ void MyAudioQueueIsRunningCallback(        void*                    inClientData
 }
 
 
+// 播放本地文件
 - (void)customAudioConfig {
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"abc" withExtension:@"aac"];
     // 打开音频文件

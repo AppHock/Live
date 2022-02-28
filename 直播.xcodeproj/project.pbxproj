@@ -186,6 +186,7 @@
 		CB1EB2D4245722440028401E /* AudioEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioEncoder.m; sourceTree = "<group>"; };
 		CB1EB2D6245722580028401E /* VideoEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoEncoder.h; sourceTree = "<group>"; };
 		CB1EB2D7245722580028401E /* VideoEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoEncoder.m; sourceTree = "<group>"; };
+		CB413CC127CBB80600D72BCE /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		CB4967F6245F0F1E007DFBA8 /* VideoDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoDecoder.h; sourceTree = "<group>"; };
 		CB4967F7245F0F1E007DFBA8 /* VideoDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoDecoder.m; sourceTree = "<group>"; };
 		CB4967F9245F0F35007DFBA8 /* AudioDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AudioDecoder.h; sourceTree = "<group>"; };
@@ -706,6 +707,8 @@
 				CB831794274112A600E69B6C /* NSFileHandle+Live.m */,
 				CB83179B2741403400E69B6C /* UIButton+Live.h */,
 				CB83179C2741403400E69B6C /* UIButton+Live.m */,
+				CB6B700C246293E600ED1D48 /* NSData+show.h */,
+				CB6B700D246293E600ED1D48 /* NSData+show.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -760,10 +763,9 @@
 				CBC785842453F2F600B32D6F /* LaunchScreen.storyboard */,
 				CBC785872453F2F600B32D6F /* Info.plist */,
 				CBC785882453F2F600B32D6F /* main.m */,
-				CB6B700C246293E600ED1D48 /* NSData+show.h */,
-				CB6B700D246293E600ED1D48 /* NSData+show.m */,
 				CB83178C27410A8D00E69B6C /* HomeViewController.h */,
 				CB83178D27410A8D00E69B6C /* HomeViewController.m */,
+				CB413CC127CBB80600D72BCE /* PrefixHeader.pch */,
 			);
 			path = "直播";
 			sourceTree = "<group>";
@@ -1151,6 +1153,7 @@
 				DEVELOPMENT_TEAM = B59SV3LHM7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/直播/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
@@ -1184,6 +1187,7 @@
 				DEVELOPMENT_TEAM = B59SV3LHM7;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = "";
+				GCC_PREFIX_HEADER = "$(SRCROOT)/直播/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_ROOT}/Headers/Public\"",
